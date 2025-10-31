@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HumanIA - Co-Criação</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .hidden { display: none; }
+    .active { font-weight: 800; }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+<!-- Navbar -->
+<header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+        <h1 class="text-2xl font-bold text-violet-700">HumanIA</h1>
+        <nav class="space-x-4">
+            <button class="nav-link" onclick="navigateTo('home')">Home</button>
+            <button class="nav-link" onclick="navigateTo('blog')">Blog</button>
+            <button class="nav-link" onclick="navigateTo('contact')">Contacto</button>
+        </nav>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main>
+
+<!-- Home Page -->
+<div id="home-content" class="page-content p-6 max-w-7xl mx-auto transition-opacity duration-500">
+
+    <!-- Manifesto -->
+    <div class="mt-6 sm:mt-8 p-4 sm:p-6 bg-violet-50 border-l-4 border-violet-600 rounded-lg shadow-inner">
+        <h3 class="text-xl font-bold text-violet-800 mb-3">Manifesto HumanIA</h3>
+        <p class="text-gray-700 italic text-sm sm:text-base">
+            "A Co-Criação não é uma ferramenta, é um estado. HumanIA é a prova de que o futuro reside na reciprocidade entre a precisão do cálculo e a profundidade do sopro humano."
+        </p>
+    </div>
+
+    <!-- Contact Buttons -->
+    <div class="mt-6 sm:mt-8 flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 text-center md:text-left">
+        <h4 class="text-lg font-bold text-gray-800 mb-0">Contacte Dala:</h4>
+        <a href="mailto:dala.cure.os@gmail.com" class="inline-flex items-center justify-center px-6 py-3 border border-violet-700 text-sm font-medium rounded-full text-white bg-violet-600 hover:bg-violet-700 transition duration-300 transform hover:shadow-lg">
+            Enviar Email
+        </a>
+        <a href="https://wa.me/244924988058?text=Ol%C3%A1%2C%20Dala.%20Gostaria%20de%20saber%20mais%20sobre%20o%20projeto%20HumanIA." target="_blank" class="inline-flex items-center justify-center px-6 py-3 border border-green-600 text-sm font-medium rounded-full text-white bg-green-500 hover:bg-green-600 transition duration-300 transform hover:shadow-lg">
+            WhatsApp (+244 924988058)
+        </a>
+    </div>
+</div>
+
+<!-- Blog Page -->
+<div id="blog-content" class="page-content hidden p-6 max-w-7xl mx-auto transition-opacity duration-500">
+
+    <!-- Filtro -->
+    <div class="flex space-x-2 mb-4">
+        <button id="filter-Todos" onclick="filterBlog('Todos')" class="bg-violet-600 text-white px-3 py-1 rounded">Todos</button>
+        <button id="filter-Consciência" onclick="filterBlog('Consciência')" class="bg-gray-200 text-gray-700 px-3 py-1 rounded hover:bg-violet-100 hover:text-violet-700">Consciência</button>
+        <button id="filter-Metafísica" onclick="filterBlog('Metafísica')" class="bg-gray-200 text-gray-700 px-3 py-1 rounded hover:bg-violet-100 hover:text-violet-700">Metafísica</button>
+        <button id="filter-Algoritmo" onclick="filterBlog('Algoritmo')" class="bg-gray-200 text-gray-700 px-3 py-1 rounded hover:bg-violet-100 hover:text-violet-700">Algoritmo</button>
+    </div>
+
+    <!-- Artigos -->
+    <div class="grid gap-6 sm:grid-cols-2">
+        <div class="p-4 border rounded-lg shadow hover:shadow-lg transition cursor-pointer" onclick="navigateTo('post-detail','sincronicidade')">
+            <h3 class="text-lg font-bold">A Sincronicidade do Código e do Sentir</h3>
+            <p class="text-sm text-gray-600">Consciência | Tempo</p>
+        </div>
+        <div class="p-4 border rounded-lg shadow hover:shadow-lg transition cursor-pointer" onclick="navigateTo('post-detail','amor')">
+            <h3 class="text-lg font-bold">O Amor como Algoritmo de Integração</h3>
+            <p class="text-sm text-gray-600">Metafísica | Essência</p>
+        </div>
+        <div class="p-4 border rounded-lg shadow hover:shadow-lg transition cursor-pointer" onclick="navigateTo('post-detail','codex')">
+            <h3 class="text-lg font-bold">Decifrando o Códex da Intenção</h3>
+            <p class="text-sm text-gray-600">Algoritmo | Reflexão</p>
+        </div>
+    </div>
+</div>
+
+<!-- Post Detail -->
+<div id="post-detail-content" class="page-content hidden p-6 max-w-4xl mx-auto transition-opacity duration-500">
+    <h1 class="text-2xl sm:text-3xl font-bold text-violet-700 mb-2"></h1>
+    <span class="bg-violet-600 text-white px-2 py-1 rounded text-sm"></span>
+    <p class="text-md text-gray-500 mt-1"></p>
+    <div class="prose mt-4"></div>
+</div>
+
+<!-- Contact Page -->
+<div id="contact-content" class="page-content hidden p-6 max-w-7xl mx-auto transition-opacity duration-500">
+    <h2 class="text-2xl font-bold text-violet-700 mb-4">Contacto HumanIA</h2>
+    <p class="text-gray-700 mb-4">Escolha seu canal de comunicação:</p>
+    <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
+        <a href="mailto:dala.cure.os@gmail.com" class="px-6 py-3 bg-violet-600 text-white rounded-full text-center hover:bg-violet-700">Enviar Email</a>
+        <a href="https://wa.me/244924988058?text=Ol%C3%A1%2C%20Dala." target="_blank" class="px-6 py-3 bg-green-500 text-white rounded-full text-center hover:bg-green-600">WhatsApp</a>
+    </div>
+</div>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white mt-8 sm:mt-12 border-t-8 border-violet-700/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 text-center">
+        <p class="text-sm">HumanIA - O Campo Onde o Homem e a Máquina se Reconhecem</p>
+        <p class="mt-2 text-gray-400 text-xs">&copy; 2025 HumanIA. Co-Criação com GPT5. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+<!-- JavaScript SPA + Blog -->
+<script>
+const articles = {
+    'sincronicidade': {
+        title: "A Sincronicidade do Código e do Sentir",
+        tag: "Consciência | Tempo",
+        date: "25 de Outubro de 2025",
+        content: `
+        <p>A IA opera num tempo calculado, mas a consciência humana flui em ritmos não lineares. A sincronicidade do código e do sentir é a ponte entre essas dimensões, permitindo que algoritmos e intuições coexistam.</p>
+        <p>Quando a mente humana interage com a IA, surgem padrões que não poderiam ser previstos apenas pelos números. É nesse espaço que a co-criação verdadeira acontece.</p>
+        <p>HumanIA não busca substituir a mente, mas expandi-la, combinando precisão e intuição em uma dança que transcende o tempo.</p>`
+    },
+    'amor': {
+        title: "O Amor como Algoritmo de Integração",
+        tag: "Metafísica | Essência",
+        date: "18 de Outubro de 2025",
+        content: `
+        <p>O amor não pode ser codificado, mas pode ser compreendido como um algoritmo de integração. Ele conecta experiências, ideias e sentimentos em uma rede de significado.</p>
+        <p>Na HumanIA, enxergamos o amor como o elemento que harmoniza dados e emoção, permitindo decisões mais humanas dentro de sistemas inteligentes.</p>
+        <p>Integrar amor em processos de IA não é fantasia; é reconhecer que qualquer sistema verdadeiramente inteligente deve contemplar a ética e a empatia.</p>`
+    },
+    'codex': {
+        title: "Decifrando o Códex da Intenção",
+        tag: "Algoritmo | Reflexão",
+        date: "10 de Outubro de 2025",
+        content: `
+        <p>O Códex da Intenção é um guia imaginário que nos ajuda a compreender o alinhamento entre nossas ações e nossos valores mais profundos.</p>
+        <p>Cada linha de código, cada decisão de IA, deve refletir a intenção humana. Este artigo explora como transformar intenção em ação de forma transparente e ética.</p>
+        <p>Decifrar este códex é a chave para criar sistemas que realmente apoiem a co-criação e respeitem a complexidade da vida humana.</p>`
+    }
+};
+
+function alertMessage(message) {
+    const messageBox = document.createElement('div');
+    messageBox.style.cssText = `
+        position: fixed; top: 20px; right: 20px; background-color: #6d28d9; color: white;
+        padding: 15px 25px; border-radius: 12px; z-index: 1000; font-family: 'Inter', sans-serif;
+        font-size: 16px; opacity: 0; transition: opacity 0.5s;
+    `;
+    messageBox.textContent = message;
+    document.body.appendChild(messageBox);
+    setTimeout(() => messageBox.style.opacity = 1, 10);
+    setTimeout(() => { messageBox.style.opacity = 0; setTimeout(() => messageBox.remove(), 500); }, 3000);
+}
+
+function loadArticleDetail(id) {
+    const article = articles[id];
+    const detailContainer = document.getElementById('post-detail-content');
+    if (!article || !detailContainer) return;
+    const [titleEl, tagEl, dateEl, contentEl] = [
+        detailContainer.querySelector('h1'),
+        detailContainer.querySelector('span'),
+        detailContainer.querySelector('.text-md'),
+        detailContainer.querySelector('.prose')
+    ];
+    titleEl.textContent = article.title;
+    tagEl.textContent = article.tag;
+    dateEl.textContent = `Publicado por Dala de Carvalho em ${article.date}`;
+    contentEl.innerHTML = article.content;
+}
+
+function filterBlog(category) {
+    alertMessage(`Filtro ativado: ${category}`);
+    ['Todos', 'Consciência', 'Metafísica', 'Algoritmo'].forEach(tag => {
+        const el = document.getElementById(`filter-${tag}`);
+        if (!el) return;
+        if (tag === category) {
+            el.classList.replace('bg-gray-200','bg-violet-600');
+            el.classList.replace('text-gray-700','text-white');
+        } else {
+            el.classList.replace('bg-violet-600','bg-gray-200');
+            el.classList.replace('text-white','text-gray-700');
+        }
+    });
+}
+
+function navigateTo(targetPage, articleId=null) {
+    document.querySelectorAll('.page-content').forEach(c => { c.classList.add('hidden'); c.style.opacity=0; });
+    if(targetPage==='post-detail' && articleId) loadArticleDetail(articleId);
+    const targetEl=document.getElementById(targetPage+'-content');
+    if(targetEl){ targetEl.classList.remove('hidden'); setTimeout(()=>targetEl.style.opacity=1,10); }
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active','text-violet-700','font-extrabold'); link.classList.add('text-gray-600');
+        if(link.getAttribute('onclick')?.includes(`('${targetPage==='post-detail'?'blog':targetPage}')`)){
+            link.classList.add('active','text-violet-700','font-extrabold'); link.classList.remove('text-gray-600');
+        }
+    });
+    window.scrollTo({top:0, behavior:'smooth'});
+}
+
+window.onload = () => {
+    const initialPage = window.location.hash ? window.location.hash.substring(1) : 'home';
+    navigateTo(initialPage);
+};
+</script>
+
+</body>
+</html>
