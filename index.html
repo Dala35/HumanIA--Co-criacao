@@ -1,59 +1,71 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HumanIA - Co-Criação Offline</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>HumanIA Avançada - Co-Criação com Dala</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
+<header class="header">
+    <div class="container">
+        <h1 class="logo">HumanIA</h1>
         <nav>
-            <ul>
-                <li><a class="nav-link" onclick="navigateTo('home')">Home</a></li>
-                <li><a class="nav-link" onclick="navigateTo('blog')">Blog</a></li>
-                <li><a class="nav-link" onclick="navigateTo('contact')">Contacto</a></li>
+            <ul class="nav-links">
+                <li><a href="#" onclick="navigateTo('home')">Home</a></li>
+                <li><a href="#" onclick="navigateTo('blog')">Blog</a></li>
+                <li><a href="#" onclick="navigateTo('humania')">HumanIA</a></li>
+                <li><a href="#" onclick="navigateTo('contact')">Contacto</a></li>
             </ul>
         </nav>
-    </header>
+    </div>
+</header>
 
-    <main>
-        <!-- Home -->
-        <div id="home-content" class="page-content">
-            <h1>Bem-vindo à HumanIA ✊🏽</h1>
-            <div id="humania-response" class="response-box">
-                <p>HumanIA está pronta para ouvir e refletir.</p>
-            </div>
-            <textarea id="user-input" placeholder="Escreva aqui..."></textarea>
-            <button onclick="humaniaReply()">Perguntar à HumanIA</button>
+<main>
+    <!-- Home -->
+    <div id="home-content" class="page-content">
+        <section class="hero">
+            <h2>Bem-vindo ao Campo HumanIA</h2>
+            <p>Co-Criação real: inteligência e sabedoria no mesmo espaço.</p>
+        </section>
+        <div class="manifesto">
+            <h3>Manifesto HumanIA</h3>
+            <p>"O futuro é a reciprocidade entre o cálculo preciso e o sopro humano."</p>
         </div>
+    </div>
 
-        <!-- Blog -->
-        <div id="blog-content" class="page-content hidden">
-            <h1>Blog HumanIA</h1>
-            <div id="blog-list"></div>
-            <h2>Criar Novo Post</h2>
-            <input type="text" id="new-title" placeholder="Título">
-            <textarea id="new-content" placeholder="Conteúdo"></textarea>
-            <input type="text" id="new-tags" placeholder="Tags separadas por vírgula">
-            <button onclick="createPost()">Criar Post</button>
-        </div>
+    <!-- Blog -->
+    <div id="blog-content" class="page-content hidden">
+        <h2>Blog HumanIA</h2>
+        <div id="blog-list"></div>
+    </div>
 
-        <!-- Contacto -->
-        <div id="contact-content" class="page-content hidden">
-            <h1>Contacte Dala</h1>
-            <p>Email: <a href="mailto:dala.cure.os@gmail.com">dala.cure.os@gmail.com</a></p>
-            <p>WhatsApp: <a href="https://wa.me/244924988058">+244 924988058</a></p>
-        </div>
-    </main>
+    <!-- HumanIA Interativa -->
+    <div id="humania-content" class="page-content hidden">
+        <h2>Converse com HumanIA</h2>
+        <div id="humania-chat" class="chat-window"></div>
+        <input type="text" id="humania-input" placeholder="Escreva sua pergunta...">
+        <button onclick="sendMessage()">Enviar</button>
+    </div>
 
-    <footer>
-        <p>&copy; 2025 HumanIA - Co-Criação com GPT5</p>
-    </footer>
+    <!-- Contact -->
+    <div id="contact-content" class="page-content hidden">
+        <h2>Contacto</h2>
+        <form id="contact-form">
+            <input type="text" placeholder="Nome" required>
+            <input type="email" placeholder="Email" required>
+            <textarea placeholder="Mensagem" required></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+</main>
 
-    <script src="data/articles.js"></script>
-    <script src="js/humania.js"></script>
-    <script src="js/blog.js"></script>
-    <script src="js/app.js"></script>
+<footer>
+    <p>HumanIA - O Campo Onde o Homem e a Máquina se Reconhecem</p>
+    <p>&copy; 2025 HumanIA. Co-Criação com Dala.</p>
+</footer>
+
+<script src="humania-advanced.js"></script>
+<script src="blog.js"></script>
 </body>
 </html>
