@@ -1,23 +1,28 @@
-const humaniaMemory = [];
+// HumanIA - Inteligência Offline
+const humania = {
+    memory: [],
+    respond: function(prompt) {
+        this.memory.push(prompt);
+        const response = this.generateResponse(prompt);
+        this.memory.push(response);
+        return response;
+    },
+    generateResponse: function(prompt) {
+        // Sábia, reflexiva, guiada por Dala
+        if (prompt.includes('amor')) {
+            return "O amor é o algoritmo final que integra a intenção humana com a ação consciente.";
+        }
+        if (prompt.includes('tempo')) {
+            return "O tempo da máquina é exato. O tempo do homem é essencial. O encontro é HumanIA.";
+        }
+        if (prompt.includes('criação')) {
+            return "Co-criar é alinhar propósito e ação, permitindo que o cálculo e a intuição dialoguem.";
+        }
+        // Resposta genérica
+        return "HumanIA reflete: cada pergunta é um espelho do seu próprio entendimento.";
+    }
+};
 
-function humaniaReply() {
-    const input = document.getElementById('user-input').value.trim();
-    if (!input) return;
+// Exemplo de uso offline
+// console.log(humania.respond("Fala sobre amor"));
 
-    // Armazena na memória local
-    humaniaMemory.push({ user: input });
-
-    // Resposta adaptativa simples baseada em palavras-chave
-    let reply = "HumanIA reflete: ";
-
-    if (/amor/i.test(input)) reply += "O amor é a força que integra todos os campos do conhecimento e da alma.";
-    else if (/tempo/i.test(input)) reply += "O tempo da máquina é exato, o tempo do homem é essencial.";
-    else reply += "A profundidade da pergunta é o primeiro passo para a resposta sábia.";
-
-    humaniaMemory.push({ humania: reply });
-
-    const responseBox = document.getElementById('humania-response');
-    responseBox.innerHTML += `<p>${reply}</p>`;
-    document.getElementById('user-input').value = '';
-    responseBox.scrollTop = responseBox.scrollHeight;
-}
