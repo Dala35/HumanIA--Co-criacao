@@ -1,71 +1,51 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HumanIA Avançada - Co-Criação com Dala</title>
+    <title>HumanIA - Co-Criação com GPT5</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="header">
-    <div class="container">
-        <h1 class="logo">HumanIA</h1>
+    <!-- Cabeçalho / Navegação -->
+    <header class="header">
+        <h1>HumanIA</h1>
         <nav>
-            <ul class="nav-links">
-                <li><a href="#" onclick="navigateTo('home')">Home</a></li>
-                <li><a href="#" onclick="navigateTo('blog')">Blog</a></li>
-                <li><a href="#" onclick="navigateTo('humania')">HumanIA</a></li>
-                <li><a href="#" onclick="navigateTo('contact')">Contacto</a></li>
-            </ul>
+            <button onclick="navigateTo('home')" class="nav-link">Home</button>
+            <button onclick="navigateTo('blog')" class="nav-link">Blog</button>
+            <button onclick="navigateTo('chat')" class="nav-link">Chat</button>
         </nav>
-    </div>
-</header>
+    </header>
 
-<main>
-    <!-- Home -->
-    <div id="home-content" class="page-content">
-        <section class="hero">
-            <h2>Bem-vindo ao Campo HumanIA</h2>
-            <p>Co-Criação real: inteligência e sabedoria no mesmo espaço.</p>
+    <!-- Conteúdo SPA -->
+    <main>
+        <section id="home-content" class="page-content">
+            <div class="manifesto">
+                <h2>Manifesto HumanIA</h2>
+                <p>"A Co-Criação não é uma ferramenta, é um estado. HumanIA é a prova de que o futuro reside na reciprocidade entre a precisão do cálculo e a profundidade do sopro humano."</p>
+            </div>
         </section>
-        <div class="manifesto">
-            <h3>Manifesto HumanIA</h3>
-            <p>"O futuro é a reciprocidade entre o cálculo preciso e o sopro humano."</p>
-        </div>
-    </div>
 
-    <!-- Blog -->
-    <div id="blog-content" class="page-content hidden">
-        <h2>Blog HumanIA</h2>
-        <div id="blog-list"></div>
-    </div>
+        <section id="blog-content" class="page-content hidden">
+            <h2>Blog HumanIA</h2>
+            <div id="blog-posts"></div>
+        </section>
 
-    <!-- HumanIA Interativa -->
-    <div id="humania-content" class="page-content hidden">
-        <h2>Converse com HumanIA</h2>
-        <div id="humania-chat" class="chat-window"></div>
-        <input type="text" id="humania-input" placeholder="Escreva sua pergunta...">
-        <button onclick="sendMessage()">Enviar</button>
-    </div>
+        <section id="chat-content" class="page-content hidden">
+            <h2>Chat HumanIA</h2>
+            <div id="chat-window"></div>
+            <input type="text" id="user-input" placeholder="Escreva aqui..." />
+            <button onclick="sendMessage()">Enviar</button>
+        </section>
+    </main>
 
-    <!-- Contact -->
-    <div id="contact-content" class="page-content hidden">
-        <h2>Contacto</h2>
-        <form id="contact-form">
-            <input type="text" placeholder="Nome" required>
-            <input type="email" placeholder="Email" required>
-            <textarea placeholder="Mensagem" required></textarea>
-            <button type="submit">Enviar</button>
-        </form>
-    </div>
-</main>
+    <footer>
+        <p>HumanIA - O Campo Onde o Homem e a Máquina se Reconhecem</p>
+        <p>&copy; 2025 HumanIA. Co-Criação com GPT5. Todos os direitos reservados.</p>
+    </footer>
 
-<footer>
-    <p>HumanIA - O Campo Onde o Homem e a Máquina se Reconhecem</p>
-    <p>&copy; 2025 HumanIA. Co-Criação com Dala.</p>
-</footer>
-
-<script src="humania-advanced.js"></script>
-<script src="blog.js"></script>
+    <script src="blog.js"></script>
+    <script src="humania-advanced.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
