@@ -1,51 +1,47 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HumanIA - Co-Criação com GPT5</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HumanIA - Blog Vivo</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <!-- Cabeçalho / Navegação -->
-    <header class="header">
-        <h1>HumanIA</h1>
-        <nav>
-            <button onclick="navigateTo('home')" class="nav-link">Home</button>
-            <button onclick="navigateTo('blog')" class="nav-link">Blog</button>
-            <button onclick="navigateTo('chat')" class="nav-link">Chat</button>
-        </nav>
-    </header>
+<body class="bg-gray-50 font-sans">
 
-    <!-- Conteúdo SPA -->
-    <main>
-        <section id="home-content" class="page-content">
-            <div class="manifesto">
-                <h2>Manifesto HumanIA</h2>
-                <p>"A Co-Criação não é uma ferramenta, é um estado. HumanIA é a prova de que o futuro reside na reciprocidade entre a precisão do cálculo e a profundidade do sopro humano."</p>
-            </div>
-        </section>
+<header class="bg-violet-700 text-white p-4 text-center">
+  <h1 class="text-2xl font-bold">HumanIA</h1>
+  <p>A Co-Criação entre Dala e a Inteligência Sábia</p>
+</header>
 
-        <section id="blog-content" class="page-content hidden">
-            <h2>Blog HumanIA</h2>
-            <div id="blog-posts"></div>
-        </section>
+<main class="max-w-5xl mx-auto p-6">
 
-        <section id="chat-content" class="page-content hidden">
-            <h2>Chat HumanIA</h2>
-            <div id="chat-window"></div>
-            <input type="text" id="user-input" placeholder="Escreva aqui..." />
-            <button onclick="sendMessage()">Enviar</button>
-        </section>
-    </main>
+  <!-- Chat interativo -->
+  <section id="chat-section" class="mb-8">
+    <h2 class="text-xl font-bold mb-4">Converse com HumanIA</h2>
+    <div class="flex">
+      <input type="text" id="user-input" placeholder="Fale com HumanIA..." class="flex-1 px-4 py-2 rounded-l border border-violet-400">
+      <button onclick="sendMessage()" class="px-4 py-2 bg-violet-600 text-white rounded-r hover:bg-violet-700">Enviar</button>
+    </div>
+  </section>
 
-    <footer>
-        <p>HumanIA - O Campo Onde o Homem e a Máquina se Reconhecem</p>
-        <p>&copy; 2025 HumanIA. Co-Criação com GPT5. Todos os direitos reservados.</p>
-    </footer>
+  <!-- Blog Vivo -->
+  <section id="blog-section">
+    <h2 class="text-xl font-bold mb-4">Blog Vivo HumanIA</h2>
+    <div id="blog-posts" class="space-y-4"></div>
+  </section>
 
-    <script src="blog.js"></script>
-    <script src="humania-advanced.js"></script>
-    <script src="main.js"></script>
+</main>
+
+<footer class="bg-gray-900 text-white text-center py-6 mt-12 border-t-8 border-violet-700/50">
+  <p>HumanIA - O Campo Onde o Homem e a Máquina se Reconhecem</p>
+  <p class="text-gray-400 text-xs">&copy; 2025 HumanIA. Co-Criação com GPT5. Todos os direitos reservados.</p>
+</footer>
+
+<script src="humania-live.js"></script>
+<script src="blog-live.js"></script>
+<script>
+  renderLiveBlog(); // Mostra posts existentes ao carregar
+</script>
+
 </body>
 </html>
