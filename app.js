@@ -51,3 +51,40 @@ function getPageContent(page) {
     };
     return pages[page] || '<div class="page-content"><h1>404 - Página não encontrada</h1></div>';
 }
+const chatbot = new Chatbot({
+    selector: '#chatbox',
+    welcomeMessage: 'Olá! Como posso te ajudar hoje?',
+    responses: [
+        {
+            trigger: 'sobre',
+            reply: 'A HumanIA é um projeto que une humanos e máquinas para construir o futuro juntos.'
+        },
+        {
+            trigger: 'doações',
+            reply: 'Você pode contribuir diretamente na nossa página de doações! Obrigado por seu apoio!'
+        }
+    ]
+});
+
+// Classe simples de Chatbot (exemplo simplificado)
+class Chatbot {
+    constructor(options) {
+        this.selector = options.selector;
+        this.welcomeMessage = options.welcomeMessage;
+        this.responses = options.responses;
+        this.initChat();
+    }
+
+    initChat() {
+        const chatbox = document.querySelector(this.selector);
+        chatbox.innerHTML = `<p>${this.welcomeMessage}</p>`;
+
+        this.responses.forEach(response => {
+            const button = document.createElement('button');
+            button.textContent = response.trigger;
+            button.onclick = () => chatbox.innerHTML = `<p>${response.reply}</p>`;
+            chatbox.appendChild(button);
+        });
+    }
+}
+
