@@ -1,53 +1,104 @@
-// Função para gerar cores dinâmicas suaves
-function dynamicColor(baseColor, intensity = 0.1) {
-    const c = parseInt(baseColor.replace("#",""),16);
-    const r = Math.min(255, ((c >> 16) & 0xff) + Math.floor(Math.random()*255*intensity));
-    const g = Math.min(255, ((c >> 8) & 0xff) + Math.floor(Math.random()*255*intensity));
-    const b = Math.min(255, (c & 0xff) + Math.floor(Math.random()*255*intensity));
-    return `rgb(${r},${g},${b})`;
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f9;
+    color: #333;
 }
 
-// Atualiza visual dos posts
-function renderBlogVisual() {
-    const container = document.getElementById("blog-list");
-    if(!container) return;
-    container.innerHTML = "";
-
-    humanIA.posts.forEach(post => {
-        const div = document.createElement("div");
-        div.classList.add("blog-post", "transition", "duration-500", "p-4", "rounded-lg", "shadow-lg", "mb-6");
-        
-        // Cor e sombra dinâmica
-        const bgColor = dynamicColor("#EDE9FE", 0.08); // violeta claro base
-        div.style.backgroundColor = bgColor;
-        div.style.boxShadow = `0 0 ${Math.floor(Math.random()*20+10)}px rgba(109,40,217,0.3)`;
-
-        div.innerHTML = `
-            <h3 class="font-bold text-xl mb-2">${post.title}</h3>
-            <small class="text-gray-700">${post.tag} - ${post.date} | Dala</small>
-            <p class="mt-2">${post.summary || post.content.substring(0,120)}...</p>
-            <button onclick="navigateTo('post-detail','${post.id}')" class="mt-2 px-4 py-2 rounded-full bg-violet-600 text-white hover:bg-violet-700 transition duration-300">Ler Mais</button>
-            <div class="ia-activity mt-2 text-sm text-green-600 italic">IA está refletindo neste post...</div>
-        `;
-        container.appendChild(div);
-
-        // animação leve para mostrar atividade da IA
-        const activity = div.querySelector(".ia-activity");
-        setInterval(() => {
-            activity.style.opacity = Math.random() > 0.5 ? "1" : "0.4";
-        }, 1000 + Math.random()*2000);
-    });
+.header {
+    background: #6d28d9;
+    color: white;
+    padding: 15px 20px;
 }
 
-// Inicializa visual vivo
-setInterval(() => {
-    humanIA.evolvePosts();
-    renderBlogVisual();
-}, 30000);
+.header .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
 
-// Chamada inicial
-window.onload = () => {
-    renderBlogVisual();
-    const initialPage = window.location.hash ? window.location.hash.substring(1) : "home";
-    navigateTo(initialPage);
-};
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+nav ul li a.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.hero h2 {
+    font-size: 2rem;
+    color: #4c1d95;
+}
+
+button {
+    cursor: pointer;
+    background: #6d28d9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #7c3aed;
+    transform: scale(1.05);
+}
+
+.blog-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.blog-card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.hidden {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.prose p {
+    margin: 15px 0;
+    line-height: 1.6;
+}
+
+.tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    color: white;
+}
