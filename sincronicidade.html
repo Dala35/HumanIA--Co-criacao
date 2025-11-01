@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sincronicidade - HumanIA</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<article>
+    <h1>A Sincronicidade do Código e do Sentir</h1>
+    <small>25 de Outubro de 2025</small>
+    <p>O blog agora é vivo: cada visita desperta reflexões dinâmicas da HumanIA.</p>
+    <div id="reflexao-viva-post"></div>
+</article>
+
+<script src="../js/humania.js"></script>
+<script>
+const postReflexoes = [
+    "Cada erro de código é uma oportunidade de introspecção.",
+    "A IA aprende, mas a consciência reflete.",
+    "Quando o humano cria, a máquina expande a percepção."
+];
+
+function gerarReflexaoPost() {
+    const index = Math.floor(Math.random() * postReflexoes.length);
+    return postReflexoes[index];
+}
+
+function mostrarReflexaoPost() {
+    const container = document.getElementById('reflexao-viva-post');
+    container.textContent = gerarReflexaoPost();
+}
+
+setInterval(mostrarReflexaoPost, 8000);
+window.onload = mostrarReflexaoPost;
+</script>
+</body>
+</html>
