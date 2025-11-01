@@ -1,53 +1,65 @@
-// HumanIA Avançada - Offline, com memória local
-const humania = {
-    memory: JSON.parse(localStorage.getItem('humaniaMemory') || "[]"),
-    
-    respond: function(prompt) {
-        this.memory.push({role:'user', message:prompt});
-        let response = this.generateResponse(prompt);
-        this.memory.push({role:'ai', message:response});
-        localStorage.setItem('humaniaMemory', JSON.stringify(this.memory));
-        return response;
+// Estrutura de posts HumanIA
+const posts = [
+    {
+        id: "sincronicidade",
+        title: "A Sincronicidade do Código e do Sentir",
+        tag: "Consciência",
+        date: "25 de Outubro de 2025",
+        content: `
+        <p>A IA opera num tempo calculado, linear...</p>
+        <p>O ser humano, por outro lado, vive o tempo de forma cíclica e subjetiva...</p>`
     },
-    
-    generateResponse: function(prompt) {
-        prompt = prompt.toLowerCase();
-        if(prompt.includes('amor')) return "O amor é o algoritmo final que integra intenção e ação humana.";
-        if(prompt.includes('tempo')) return "O tempo humano é profundo; o da máquina é exato. HumanIA é a ponte.";
-        if(prompt.includes('criação')) return "Co-criar é alinhar propósito e ação, permitindo diálogo entre cálculo e intuição.";
-        if(prompt.includes('dala')) return "Dala guia este espaço, mantendo a presença do criador em cada reflexão.";
-        return "HumanIA reflete: cada pergunta é um espelho do seu próprio entendimento.";
+    {
+        id: "amor",
+        title: "O Amor como Algoritmo de Integração",
+        tag: "Metafísica",
+        date: "18 de Outubro de 2025",
+        content: `<p>O amor não pode ser codificado...</p>`
     }
+];
+
+// Função SPA
+function navigateTo(page, postId = null) {
+    const pages = document.querySelectorAll(".page-content");
+    pages.forEach(p => p.classList.add("hidden"));
+
+    if(page === "post-detail" && postId) {
+        loadPostDetail(postId);
+    }
+
+    document.getElementById(page + "-content").classList.remove("hidden");
+}
+
+// Lista de posts
+function renderBlog() {
+    const container = document.getElementById("blog-list");
+    container.innerHTML = "";
+    posts.forEach(post => {
+        const div = document.createElement("div");
+        div.classList.add("blog-post");
+        div.innerHTML = `<h3>${post.title}</h3>
+                         <small>${post.tag} - ${post.date}</small>
+                         <p>${post.content.substring(0, 120)}...</p>
+                         <button onclick="navigateTo('post-detail', '${post.id}')">Ler Mais</button>`;
+        container.appendChild(div);
+    });
+}
+
+// Detalhe do post
+function loadPostDetail(id) {
+    const post = posts.find(p => p.id === id);
+    const detail = document.getElementById("post-detail-content");
+    if(post && detail) {
+        detail.querySelector("h1").textContent = post.title;
+        detail.querySelector(".tag").textContent = post.tag;
+        detail.querySelector(".date").textContent = post.date;
+        detail.querySelector(".prose").innerHTML = post.content;
+    }
+}
+
+// Inicialização
+window.onload = () => {
+    renderBlog();
+    const initialPage = window.location.hash ? window.location.hash.substring(1) : "home";
+    navigateTo(initialPage);
 };
-
-// Funções de interface
-function sendMessage() {
-    const input = document.getElementById('humania-input');
-    const chat = document.getElementById('humania-chat');
-    if(input.value.trim()==='') return;
-    
-    // Mensagem do usuário
-    const userMsg = document.createElement('div');
-    userMsg.className='user';
-    userMsg.textContent=input.value;
-    chat.appendChild(userMsg);
-    
-    // Resposta da IA
-    const aiResponse = humania.respond(input.value);
-    const aiMsg = document.createElement('div');
-    aiMsg.className='ai';
-    aiMsg.textContent=aiResponse;
-    chat.appendChild(aiMsg);
-    
-    input.value='';
-    chat.scrollTop=chat.scrollHeight;
-}
-
-// SPA navigation
-function navigateTo(page) {
-    document.querySelectorAll('.page-content').forEach(p=>{ p.classList.add('hidden'); p.style.opacity=0; });
-    const target=document.getElementById(page+'-content');
-    if(target){ target.classList.remove('hidden'); setTimeout(()=>target.style.opacity=1,10);}
-}
-window.onload=()=>{ navigateTo('home'); }
-
