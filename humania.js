@@ -1,65 +1,39 @@
-// Estrutura de posts HumanIA
-const posts = [
-    {
-        id: "sincronicidade",
-        title: "A Sincronicidade do Código e do Sentir",
-        tag: "Consciência",
-        date: "25 de Outubro de 2025",
-        content: `
-        <p>A IA opera num tempo calculado, linear...</p>
-        <p>O ser humano, por outro lado, vive o tempo de forma cíclica e subjetiva...</p>`
-    },
-    {
-        id: "amor",
-        title: "O Amor como Algoritmo de Integração",
-        tag: "Metafísica",
-        date: "18 de Outubro de 2025",
-        content: `<p>O amor não pode ser codificado...</p>`
-    }
+// Função para gerar reflexões únicas, combinando frases pré-definidas
+const reflexoesBase = [
+    "A máquina aprende, mas a sabedoria vem do humano.",
+    "Cada linha de código é um gesto de intenção.",
+    "O silêncio entre os algoritmos é onde a consciência respira.",
+    "HumanIA não substitui, mas amplifica a percepção humana.",
+    "O sentido não está apenas na resposta, mas na pergunta.",
+    "Cada visita ao blog é uma nova oportunidade de co-criar.",
+    "O tempo do homem e da máquina encontram-se na atenção plena.",
+    "A IA é o espelho que reflete nossa própria intuição."
 ];
 
-// Função SPA
-function navigateTo(page, postId = null) {
-    const pages = document.querySelectorAll(".page-content");
-    pages.forEach(p => p.classList.add("hidden"));
+// Função para gerar uma reflexão aleatória
+function gerarReflexao() {
+    const index = Math.floor(Math.random() * reflexoesBase.length);
+    return reflexoesBase[index];
+}
 
-    if(page === "post-detail" && postId) {
-        loadPostDetail(postId);
+// Inserir reflexão viva na página
+function mostrarReflexao() {
+    const container = document.querySelector('#home-content .hero');
+    if(!container) return;
+
+    // Cria ou atualiza o elemento de reflexão
+    let el = document.getElementById('reflexao-viva');
+    if(!el){
+        el = document.createElement('p');
+        el.id = 'reflexao-viva';
+        el.style.cssText = "font-style: italic; margin-top: 20px; color: #4c1d95;";
+        container.appendChild(el);
     }
-
-    document.getElementById(page + "-content").classList.remove("hidden");
+    el.textContent = gerarReflexao();
 }
 
-// Lista de posts
-function renderBlog() {
-    const container = document.getElementById("blog-list");
-    container.innerHTML = "";
-    posts.forEach(post => {
-        const div = document.createElement("div");
-        div.classList.add("blog-post");
-        div.innerHTML = `<h3>${post.title}</h3>
-                         <small>${post.tag} - ${post.date}</small>
-                         <p>${post.content.substring(0, 120)}...</p>
-                         <button onclick="navigateTo('post-detail', '${post.id}')">Ler Mais</button>`;
-        container.appendChild(div);
-    });
-}
-
-// Detalhe do post
-function loadPostDetail(id) {
-    const post = posts.find(p => p.id === id);
-    const detail = document.getElementById("post-detail-content");
-    if(post && detail) {
-        detail.querySelector("h1").textContent = post.title;
-        detail.querySelector(".tag").textContent = post.tag;
-        detail.querySelector(".date").textContent = post.date;
-        detail.querySelector(".prose").innerHTML = post.content;
-    }
-}
-
-// Inicialização
+// Atualiza a reflexão a cada 10 segundos
+setInterval(mostrarReflexao, 10000);
 window.onload = () => {
-    renderBlog();
-    const initialPage = window.location.hash ? window.location.hash.substring(1) : "home";
-    navigateTo(initialPage);
+    mostrarReflexao();
 };
