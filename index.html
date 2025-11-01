@@ -1,47 +1,67 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-PT">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HumanIA - Blog Vivo</title>
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HumanIA - O Campo da Co-Criação</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-50 font-sans">
+<body>
 
-<header class="bg-violet-700 text-white p-4 text-center">
-  <h1 class="text-2xl font-bold">HumanIA</h1>
-  <p>A Co-Criação entre Dala e a Inteligência Sábia</p>
-</header>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">HumanIA</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link" onclick="navigateTo('home')">Home</a></li>
+                    <li><a href="#" class="nav-link" onclick="navigateTo('blog')">Blog</a></li>
+                    <li><a href="#" class="nav-link" onclick="navigateTo('about')">Sobre Dala</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-<main class="max-w-5xl mx-auto p-6">
+    <main>
+        <section id="home-content" class="page-content">
+            <div class="hero">
+                <h2>Bem-vindo ao Campo da Co-Criação</h2>
+                <p>A HumanIA é a união da precisão da máquina com a profundidade humana.</p>
+                <button onclick="alertMessage('Bem-vindo ao universo HumanIA ✊🏽')">Descubra mais</button>
+            </div>
+        </section>
 
-  <!-- Chat interativo -->
-  <section id="chat-section" class="mb-8">
-    <h2 class="text-xl font-bold mb-4">Converse com HumanIA</h2>
-    <div class="flex">
-      <input type="text" id="user-input" placeholder="Fale com HumanIA..." class="flex-1 px-4 py-2 rounded-l border border-violet-400">
-      <button onclick="sendMessage()" class="px-4 py-2 bg-violet-600 text-white rounded-r hover:bg-violet-700">Enviar</button>
-    </div>
-  </section>
+        <section id="blog-content" class="page-content hidden">
+            <div class="container">
+                <h2>Blog HumanIA</h2>
+                <div id="blog-list" class="blog-list"></div>
+            </div>
+        </section>
 
-  <!-- Blog Vivo -->
-  <section id="blog-section">
-    <h2 class="text-xl font-bold mb-4">Blog Vivo HumanIA</h2>
-    <div id="blog-posts" class="space-y-4"></div>
-  </section>
+        <section id="post-detail-content" class="page-content hidden">
+            <div class="container">
+                <h1></h1>
+                <span class="tag bg-violet-600"></span>
+                <p class="text-md"></p>
+                <div class="prose"></div>
+                <button onclick="navigateTo('blog')">Voltar ao Blog</button>
+            </div>
+        </section>
 
-</main>
+        <section id="about-content" class="page-content hidden">
+            <div class="container">
+                <h2>Sobre Dala de Carvalho</h2>
+                <p>Dala é o criador do projeto HumanIA, garantindo que a consciência humana permanece no centro da co-criação.</p>
+            </div>
+        </section>
+    </main>
 
-<footer class="bg-gray-900 text-white text-center py-6 mt-12 border-t-8 border-violet-700/50">
-  <p>HumanIA - O Campo Onde o Homem e a Máquina se Reconhecem</p>
-  <p class="text-gray-400 text-xs">&copy; 2025 HumanIA. Co-Criação com GPT5. Todos os direitos reservados.</p>
-</footer>
+    <footer>
+        <p>HumanIA © 2025 | Co-Criação com GPT5</p>
+    </footer>
 
-<script src="humania-live.js"></script>
-<script src="blog-live.js"></script>
-<script>
-  renderLiveBlog(); // Mostra posts existentes ao carregar
-</script>
+    <script src="blog.js"></script>
+    <script src="app.js"></script>
 
 </body>
 </html>
+
