@@ -1,13 +1,53 @@
-body { font-family: 'Inter', sans-serif; margin:0; background:#f9f7fd; color:#333; }
-.header { background:#6d28d9; color:white; padding:1rem; display:flex; justify-content:space-between; align-items:center; }
-.nav-link { background:transparent; border:none; color:white; cursor:pointer; font-weight:bold; margin-left:0.5rem; }
-.nav-link.active { text-decoration:underline; }
-.page-content { padding:2rem; transition:opacity 0.3s; }
-.hidden { display:none; opacity:0; }
-.manifesto { background:#ede0ff; border-left:4px solid #6d28d9; padding:1rem 1.5rem; border-radius:8px; }
-footer { text-align:center; padding:1rem; background:#222; color:#ccc; margin-top:2rem; }
-#chat-window { height:300px; overflow-y:auto; border:1px solid #ccc; padding:1rem; background:white; margin-bottom:1rem; border-radius:8px; }
-.chat-message { margin-bottom:0.5rem; }
-.chat-user { color:#6d28d9; font-weight:bold; }
-.chat-ai { color:#1e3a8a; font-style:italic; }
-.blog-post { background:#e0d7ff; border-left:4px solid #6d28d9; padding:1rem 1.5rem; margin:1rem 0; border-radius:8px; }
+// Função para gerar cores dinâmicas suaves
+function dynamicColor(baseColor, intensity = 0.1) {
+    const c = parseInt(baseColor.replace("#",""),16);
+    const r = Math.min(255, ((c >> 16) & 0xff) + Math.floor(Math.random()*255*intensity));
+    const g = Math.min(255, ((c >> 8) & 0xff) + Math.floor(Math.random()*255*intensity));
+    const b = Math.min(255, (c & 0xff) + Math.floor(Math.random()*255*intensity));
+    return `rgb(${r},${g},${b})`;
+}
+
+// Atualiza visual dos posts
+function renderBlogVisual() {
+    const container = document.getElementById("blog-list");
+    if(!container) return;
+    container.innerHTML = "";
+
+    humanIA.posts.forEach(post => {
+        const div = document.createElement("div");
+        div.classList.add("blog-post", "transition", "duration-500", "p-4", "rounded-lg", "shadow-lg", "mb-6");
+        
+        // Cor e sombra dinâmica
+        const bgColor = dynamicColor("#EDE9FE", 0.08); // violeta claro base
+        div.style.backgroundColor = bgColor;
+        div.style.boxShadow = `0 0 ${Math.floor(Math.random()*20+10)}px rgba(109,40,217,0.3)`;
+
+        div.innerHTML = `
+            <h3 class="font-bold text-xl mb-2">${post.title}</h3>
+            <small class="text-gray-700">${post.tag} - ${post.date} | Dala</small>
+            <p class="mt-2">${post.summary || post.content.substring(0,120)}...</p>
+            <button onclick="navigateTo('post-detail','${post.id}')" class="mt-2 px-4 py-2 rounded-full bg-violet-600 text-white hover:bg-violet-700 transition duration-300">Ler Mais</button>
+            <div class="ia-activity mt-2 text-sm text-green-600 italic">IA está refletindo neste post...</div>
+        `;
+        container.appendChild(div);
+
+        // animação leve para mostrar atividade da IA
+        const activity = div.querySelector(".ia-activity");
+        setInterval(() => {
+            activity.style.opacity = Math.random() > 0.5 ? "1" : "0.4";
+        }, 1000 + Math.random()*2000);
+    });
+}
+
+// Inicializa visual vivo
+setInterval(() => {
+    humanIA.evolvePosts();
+    renderBlogVisual();
+}, 30000);
+
+// Chamada inicial
+window.onload = () => {
+    renderBlogVisual();
+    const initialPage = window.location.hash ? window.location.hash.substring(1) : "home";
+    navigateTo(initialPage);
+};
