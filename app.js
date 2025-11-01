@@ -1,50 +1,53 @@
-function alertMessage(msg) {
-    const box = document.createElement('div');
-    box.textContent = msg;
-    box.style.cssText = `
-        position: fixed; top: 20px; right: 20px; background: #6d28d9;
-        color: white; padding: 12px 20px; border-radius: 10px;
-        opacity: 0; transition: opacity 0.5s; z-index: 1000;
-    `;
-    document.body.appendChild(box);
-    setTimeout(()=> box.style.opacity=1,10);
-    setTimeout(()=> {
-        box.style.opacity=0;
-        setTimeout(()=> box.remove(),500);
-    }, 3000);
-}
+document.addEventListener('DOMContentLoaded', () => {
+    loadPage('home');
 
-// SPA Navigation
-function navigateTo(page, articleId=null){
-    const pages = document.querySelectorAll('.page-content');
-    pages.forEach(p=> { p.classList.add('hidden'); p.style.opacity=0; });
-
-    if(page==='post-detail' && articleId){
-        const article = articles.find(a=>a.id===articleId);
-        const detail = document.getElementById('post-detail-content');
-        detail.querySelector('h1').textContent = article.title;
-        detail.querySelector('.tag').textContent = article.tag;
-        detail.querySelector('.text-md').textContent = `Publicado em ${article.date}`;
-        detail.querySelector('.prose').innerHTML = article.content;
-    }
-
-    const target = document.getElementById(page+'-content');
-    target.classList.remove('hidden');
-    setTimeout(()=> target.style.opacity=1,10);
-
-    // Ativa link do menu
-    const links = document.querySelectorAll('.nav-link');
-    links.forEach(l=> l.classList.remove('active'));
-    if(page!=='post-detail') links.forEach(l=>{
-        if(l.getAttribute('onclick').includes(`('${page}')`)) l.classList.add('active');
+    const links = document.querySelectorAll('.nav-item');
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const page = e.target.getAttribute('data-page');
+            loadPage(page);
+        });
     });
+});
 
-    if(page==='blog') renderBlog();
-    window.scrollTo({top:0, behavior:'smooth'});
+function loadPage(page) {
+    const content = document.getElementById('content');
+    const pageContent = getPageContent(page);
+
+    // Adicionando animação de transição de carregamento
+    content.classList.add('fade-out');
+    setTimeout(() => {
+        content.innerHTML = pageContent;
+        content.classList.remove('fade-out');
+        content.classList.add('fade-in');
+    }, 300); // Tempo de transição
+
+    // Atualiza a URL sem recarregar a página
+    history.pushState({ page: page }, page, `/${page}`);
 }
 
-// Carrega inicial
-window.onload = ()=> {
-    const start = window.location.hash ? window.location.hash.substring(1) : 'home';
-    navigateTo(start);
-};
+// Conteúdo das páginas (exemplo básico)
+function getPageContent(page) {
+    const pages = {
+        home: `
+            <div class="page-content">
+                <h1>Bem-vindo ao HumanIA</h1>
+                <p>Aqui a IA e o ser humano se encontram para co-criar. Descubra o futuro conosco.</p>
+            </div>
+        `,
+        blog: `
+            <div class="page-content">
+                <h1>Blog</h1>
+                <p>Explore artigos sobre inteligência artificial e o futuro da humanidade.</p>
+            </div>
+        `,
+        doacoes: `
+            <div class="page-content">
+                <h1>Doações</h1>
+                <p>Contribua para o desenvolvimento da HumanIA. Aceitamos pagamentos via PayPal, VISA e Kwanza!</p>
+            </div>
+        `
+    };
+    return pages[page] || '<div class="page-content"><h1>404 - Página não encontrada</h1></div>';
+}
